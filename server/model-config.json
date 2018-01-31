@@ -1,0 +1,80 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "Tc001": {
+    "public": true,
+    "dataSource": "sqldb"
+  },
+  "Tc002": {
+    "public": true,
+    "dataSource": "sqldb"
+  },
+  "Tc004": {
+    "public": true,
+    "dataSource": "sqldb"
+  },
+  "To001": {
+    "public": true,
+    "dataSource": "sqldb"
+  },
+  "To0011": {
+    "public": true,
+    "dataSource": "sqldb"
+  },
+  "Tl001": {
+    "public": true,
+    "dataSource": "sqldb"
+  },
+  "Tl0012": {
+    "public": true,
+    "dataSource": "sqldb"
+  },
+  "Tfv001": {
+    "public": true,
+    "dataSource": "sqldb"
+  },
+  "Tfv0011": {
+    "public": true,
+    "dataSource": "sqldb"
+  },
+  "Tc0022": {
+    "public": true,
+    "dataSource": "sqldb"
+  },
+  "Ts002": {
+    "public": true,
+    "dataSource": "sqldb"
+  },
+  "Ts003": {
+    "public": true,
+    "dataSource": "sqldb"
+  },
+  "To001a1": {
+    "public": true,
+    "dataSource": "sqldb"
+  },
+  "Tl002": {
+    "public": true,
+    "dataSource": "sqldb"
+  },
+  "Tc003": {
+    "public": true,
+    "dataSource": "sqldb"
+  },
+  "VrMoGetpedidos": {
+    "public": true,
+    "dataSource": "sqldb"
+  }
+}

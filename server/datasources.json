@@ -1,0 +1,11 @@
+{
+  "sqldb": {
+    "name": "sqldb",
+    "host": "GuidoPC",
+    "port": 1433,
+    "database": "BDDistBHF",
+    "username": "goku",
+    "password": "321",
+    "connector": "mssql"
+  }
+ }

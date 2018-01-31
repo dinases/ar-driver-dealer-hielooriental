@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+var map;
+var flightPlanCoordinates;
+var aux;
+function initMap() {
+  $.get("https://water-delivery.herokuapp.com/api/Tl002s?filter[fields][lblat]=true&filter[fields][lblongi]=true", function(data, status){
+    Object.keys(data).map(function(k) {
+      data[k].lat = data[k].lblat;
+      data[k].lng = data[k].lblongi;
+      delete data[k].lblat;
+      delete data[k].lblongi;
+    });
+    flightPlanCoordinates = data;
+
+    map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 14,
+      center: {lat: -17.8242958, lng: -63.1867781},
+      mapTypeId: google.maps.MapTypeId.TERRAIN
+    });
+
+    var directionsService = new google.maps.DirectionsService();
+    var directionsDisplay = new google.maps.DirectionsRenderer({
+      suppressMarkers: true
+    });
+    directionsDisplay.setMap(map);
+    var flightPath;
+    var start;
+    var end;
+    var size = flightPlanCoordinates.length / 23;
+    var k = 0;
+    var l = 23;
+    var latesArray = [];
+    console.log(size);
+
+    for (var i = 0; i < size; i++) {
+      var waypts = [];
+
+      for (var j = k; j < l; j++) {
+        waypts.push({
+            location: flightPlanCoordinates[j],
+            stopover: true
+        });
+      }
+      start = flightPlanCoordinates[k];
+      end = flightPlanCoordinates[l];
+      k = l;
+      l = l + 23;
+      var request = {
+        origin: start,
+        destination: end,
+        waypoints: waypts,
+        optimizeWaypoints: true,
+        travelMode: google.maps.TravelMode.DRIVING
+      }
+
+      directionsService.route(request, function(response, status) {
+        if (status == google.maps.DirectionsStatus.OK) {
+
+          // var mArray = [];
+          // Object.keys(response.routes[0].legs).map(function(k) {
+          //   mArray.push(response.routes[0].legs[k].start_location);
+          //   mArray.push(response.routes[0].legs[k].end_location);
+          // });
+          //
+          // for (var i = 0; i < mArray.length; i++) {
+          //   latesArray.push(mArray[i])
+          // }
+          //
+          // flightPath = new google.maps.Polyline({
+          //   path: latesArray,
+          //   geodesic: true,
+          //   strokeColor: '#FF0000',
+          //   strokeOpacity: 1.0,
+          //   strokeWeight: 2
+          // });
+          //
+          // flightPath.setMap(map);
+        }
+      });
+    }
+  });
+}
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHpoQiezMVdAG9acJk9vdH-t3A4x2e_BU&callback=initMap"
+        async defer></script>
+  </body>
+</html>
